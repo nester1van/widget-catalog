@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Widget Catalog — dev</title>
+    <link rel="stylesheet" href="https://unpkg.com/antd/dist/reset.css" />
+  </head>
+  <body>
+    <div id="widget-catalog"></div>
+
+    <script>
+      function initWidgetCatalog() {
+        const widget = new window.WidgetCatalog({
+          el: "#widget-catalog",
+          dealers: []
+        });
+        widget.run();
+      }
+      window.onload = initWidgetCatalog;
+    </script>
+    <script src="/widget-catalog.js"></script>
+  </body>
+</html>
