@@ -1,0 +1,23 @@
+.widget-catalog {
+  &__header {
+    // styles for header
+  }
+
+  &__product-card {
+    margin-bottom: 20px;
+
+    &-actions {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+
+  &__filters {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
