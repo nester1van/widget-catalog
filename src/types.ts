@@ -6,6 +6,8 @@ export interface IGood {
   dealerId?: string;
 }
 
+export type DealerId = string;
+
 export type SortMode = 'off' | 'asc' | 'desc';
 
 export interface WidgetOptions {

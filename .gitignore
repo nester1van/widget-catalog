@@ -7,3 +7,5 @@ node_modules/
 # Логи
 npm-debug.log*
 
+# Переменные окружения
+.env
