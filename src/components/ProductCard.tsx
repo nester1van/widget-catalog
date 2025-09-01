@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Button, InputNumber } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useStores } from '@/stores/StoreProvider';
+import { getImageUrl } from '../services/api';
 import { IGood } from '../types';
 
 interface ProductCardProps {
@@ -16,9 +17,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     <Card
       className="widget-catalog__product-card"
       hoverable
-      cover={<img alt={product.name} src={product.image} loading="lazy" />}
+      cover={
+        <img
+          className="widget-catalog__product-card-image"
+          alt={product.name}
+          src={getImageUrl(product.image)}
+          loading="lazy"
+        />
+      }
     >
-      <Card.Meta title={product.name} description={`Price: ${product.price}`} />
+      <Card.Meta title={product.name} description={`Цена: ${product.price}`} />
       <div className="widget-catalog__product-card-actions">
         {quantity > 0 ? (
           <>
@@ -44,12 +52,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             />
             <Button onClick={() => cartStore.increment(product.id)}>+</Button>
             <Button danger onClick={() => cartStore.removeItem(product.id)}>
-              Delete
+              Удалить
             </Button>
           </>
         ) : (
           <Button type="primary" onClick={() => cartStore.addItem(product.id)}>
-            Add to cart
+            Добавить в корзину
           </Button>
         )}
       </div>

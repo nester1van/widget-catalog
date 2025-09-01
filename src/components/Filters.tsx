@@ -15,14 +15,14 @@ const Filters: React.FC = () => {
           <CheckableTag
             key={dealerId}
             checked={filterStore.selectedDealers.includes(dealerId)}
-            onChange={(checked) => filterStore.toggleDealer(dealerId)}
+            onChange={() => filterStore.toggleDealer(dealerId)}
           >
             {dealerId}
           </CheckableTag>
         ))}
       </div>
       <Button onClick={() => filterStore.cyclePriceSort()}>
-        Sort by price ({filterStore.priceSort})
+        Сортировать по цене ({filterStore.priceSort})
       </Button>
     </div>
   );

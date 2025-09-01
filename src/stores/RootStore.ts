@@ -13,7 +13,7 @@ export class RootStore {
     this.dealersStore = new DealersStore();
     this.goodsStore = new GoodsStore(this);
     this.filterStore = new FilterStore(this);
-    this.cartStore = new CartStore();
+    this.cartStore = new CartStore(this);
 
     if (initialDealers) {
       this.filterStore.setSelectedDealers(initialDealers);

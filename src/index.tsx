@@ -1,8 +1,11 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import { WidgetOptions } from './types';
 import './styles/main.scss';
+import { RootStore } from './stores/RootStore';
+import { StoreProvider } from './stores/StoreProvider';
 
 class WidgetCatalog {
   opts: WidgetOptions;
@@ -17,7 +20,14 @@ class WidgetCatalog {
       return;
     }
     const root = createRoot(el as HTMLElement);
-    root.render(<App initialDealers={this.opts.dealers} />);
+    const rootStore = new RootStore(this.opts.dealers);
+    root.render(
+      <StoreProvider store={rootStore}>
+        <Router>
+          <App />
+        </Router>
+      </StoreProvider>
+    );
   }
 }
 

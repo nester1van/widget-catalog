@@ -1,19 +1,27 @@
-import React, { useEffect } from 'react';
-import { getDealers } from './services/api';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { Layout } from 'antd';
+import Header from './components/Header';
+import MainPage from './pages/MainPage';
+import CatalogPage from './pages/CatalogPage';
+import CartPage from './pages/CartPage';
 
-interface Props {
-  initialDealers?: string[] | undefined;
-}
+const { Content } = Layout;
 
-const App: React.FC<Props> = ({ initialDealers }) => {
-
+const App: React.FC = () => {
   return (
-    <div className="widget-catalog__root">
-      <div style={{ padding: 16 }}>
-        <h3>Widget Catalog</h3>
-        <div>Initial dealers: {initialDealers?.join(', ') ?? 'all'}</div>
-      </div>
-    </div>
+    <Layout>
+      <Header />
+      <Content style={{ padding: '0 50px', marginTop: 64 }}>
+        <div style={{ background: '#fff', padding: 24, minHeight: 380 }}>
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/catalog" element={<CatalogPage />} />
+            <Route path="/cart" element={<CartPage />} />
+          </Routes>
+        </div>
+      </Content>
+    </Layout>
   );
 };
 

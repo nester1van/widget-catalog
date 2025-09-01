@@ -5,6 +5,26 @@
 
   &__product-card {
     margin-bottom: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .ant-card-cover {
+      padding: 20px;
+    }
+
+    &-image {
+      height: 200px;
+      object-fit: contain;
+    }
+
+    .ant-card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-grow: 1;
+    }
 
     &-actions {
       margin-top: 10px;
