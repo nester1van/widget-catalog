@@ -2,22 +2,23 @@ import React from "react";
 import { Layout, Menu, Badge } from "antd";
 import { observer } from "mobx-react-lite";
 import { useStores } from "@/stores/StoreProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Header: React.FC = () => {
   const { cartStore } = useStores();
+  const { pathname } = useLocation();
 
   const items = [
     {
-      key: "1",
+      key: "/",
       label: <Link to="/">Главная</Link>,
     },
     {
-      key: "2",
+      key: "/catalog",
       label: <Link to="/catalog">Каталог</Link>,
     },
     {
-      key: "3",
+      key: "/cart",
       label: (
         <Link to="/cart">
           <Badge count={cartStore.totalQuantity}>Корзина</Badge>
@@ -31,7 +32,7 @@ const Header: React.FC = () => {
       <Menu
         theme="dark"
         mode="horizontal"
-        defaultSelectedKeys={["1"]}
+        selectedKeys={[pathname]}
         items={items}
       />
     </Layout.Header>
