@@ -1,18 +1,20 @@
-import React from 'react';
-import { observer } from 'mobx-react-lite';
-import { List, Button, Empty, Typography } from 'antd';
-import { useStores } from '../stores/StoreProvider';
-import { IGood } from '../types';
+import React from "react";
+import { observer } from "mobx-react-lite";
+import { List, Button, Empty, Typography } from "antd";
+import { useStores } from "../stores/StoreProvider";
+import { IGood } from "../types";
 
 const { Title } = Typography;
 
 const CartPage: React.FC = () => {
   const { cartStore, goodsStore } = useStores();
 
-  const cartItems = Array.from(cartStore.items.entries()).map(([id, quantity]) => {
-    const product = goodsStore.goods.find(g => g.id === id);
-    return { product, quantity };
-  }).filter(item => item.product) as { product: IGood; quantity: number }[];
+  const cartItems = Array.from(cartStore.items.entries())
+    .map(([id, quantity]) => {
+      const product = goodsStore.goods.find((g) => g.id === id);
+      return { product, quantity };
+    })
+    .filter((item) => item.product) as { product: IGood; quantity: number }[];
 
   if (cartItems.length === 0) {
     return <Empty description="Корзина пуста" />;
@@ -28,7 +30,12 @@ const CartPage: React.FC = () => {
           <List.Item
             key={item.product.id}
             actions={[
-              <Button key={`delete-${item.product.id}`} type="primary" danger onClick={() => cartStore.removeItem(item.product.id)}>
+              <Button
+                key={`delete-${item.product.id}`}
+                type="primary"
+                danger
+                onClick={() => cartStore.removeItem(item.product.id)}
+              >
                 Удалить
               </Button>,
             ]}

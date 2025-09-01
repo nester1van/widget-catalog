@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { observer } from 'mobx-react-lite';
-import { Carousel, Spin, Alert } from 'antd';
-import { useStores } from '../stores/StoreProvider';
-import ProductCard from '../components/ProductCard';
-import { IGood } from '../types';
+import React, { useEffect } from "react";
+import { observer } from "mobx-react-lite";
+import { Carousel, Spin, Alert } from "antd";
+import { useStores } from "../stores/StoreProvider";
+import ProductCard from "../components/ProductCard";
+import { IGood } from "../types";
 
 const MainPage: React.FC = () => {
   const { goodsStore, dealersStore } = useStores();
@@ -22,7 +22,14 @@ const MainPage: React.FC = () => {
   }
 
   if (goodsStore.error || dealersStore.error) {
-    return <Alert message="Ошибка" description={goodsStore.error || dealersStore.error} type="error" showIcon />;
+    return (
+      <Alert
+        message="Ошибка"
+        description={goodsStore.error || dealersStore.error}
+        type="error"
+        showIcon
+      />
+    );
   }
 
   const carouselSettings = {

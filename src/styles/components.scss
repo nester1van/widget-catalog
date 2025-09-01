@@ -3,6 +3,21 @@
     // styles for header
   }
 
+  &__content {
+    padding: 0 50px;
+    margin-top: 64px;
+
+    @media (max-width: 768px) {
+      padding: 0 20px;
+    }
+  }
+
+  &__inner-content {
+    background: #fff;
+    padding: 24px;
+    min-height: 380px;
+  }
+
   &__product-card {
     margin-bottom: 20px;
     height: 100%;

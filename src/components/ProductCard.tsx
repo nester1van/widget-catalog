@@ -1,9 +1,9 @@
-import React from 'react';
-import { Card, Button, InputNumber } from 'antd';
-import { observer } from 'mobx-react-lite';
-import { useStores } from '@/stores/StoreProvider';
-import { getImageUrl } from '../services/api';
-import { IGood } from '../types';
+import React from "react";
+import { Card, Button, InputNumber } from "antd";
+import { observer } from "mobx-react-lite";
+import { useStores } from "@/stores/StoreProvider";
+import { getImageUrl } from "../services/api";
+import { IGood } from "../types";
 
 interface ProductCardProps {
   product: IGood;

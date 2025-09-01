@@ -1,6 +1,6 @@
-import { makeAutoObservable, runInAction } from 'mobx';
-import { getDealers } from '../services/api';
-import { DealerId } from '../types';
+import { makeAutoObservable, runInAction } from "mobx";
+import { getDealers } from "../services/api";
+import { DealerId } from "../types";
 
 export class DealersStore {
   dealers: DealerId[] = [];

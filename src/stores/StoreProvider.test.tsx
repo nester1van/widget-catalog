@@ -1,10 +1,10 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import { StoreProvider, useStores } from './StoreProvider';
-import { RootStore } from './RootStore';
+import React from "react";
+import { render } from "@testing-library/react";
+import { StoreProvider, useStores } from "./StoreProvider";
+import { RootStore } from "./RootStore";
 
-describe('StoreProvider', () => {
-  it('should provide the store to child components', () => {
+describe("StoreProvider", () => {
+  it("should provide the store to child components", () => {
     const rootStore = new RootStore();
     let storeFromHook: RootStore | null = null;
 
@@ -16,13 +16,13 @@ describe('StoreProvider', () => {
     render(
       <StoreProvider store={rootStore}>
         <TestComponent />
-      </StoreProvider>
+      </StoreProvider>,
     );
 
     expect(storeFromHook).toBe(rootStore);
   });
 
-  it('should throw an error if useStores is used outside of a StoreProvider', () => {
+  it("should throw an error if useStores is used outside of a StoreProvider", () => {
     const TestComponent = () => {
       useStores();
       return null;
@@ -32,7 +32,9 @@ describe('StoreProvider', () => {
     const originalError = console.error;
     console.error = jest.fn();
 
-    expect(() => render(<TestComponent />)).toThrow('useStores must be used within a StoreProvider');
+    expect(() => render(<TestComponent />)).toThrow(
+      "useStores must be used within a StoreProvider",
+    );
 
     // Restore console.error
     console.error = originalError;

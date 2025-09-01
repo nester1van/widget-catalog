@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import { observer } from 'mobx-react-lite';
-import { Spin, Alert, Row, Col } from 'antd';
-import { useStores } from '../stores/StoreProvider';
-import ProductCard from '../components/ProductCard';
-import Filters from '../components/Filters';
-import { IGood } from '../types';
+import React, { useEffect } from "react";
+import { observer } from "mobx-react-lite";
+import { Spin, Alert, Row, Col } from "antd";
+import { useStores } from "../stores/StoreProvider";
+import ProductCard from "../components/ProductCard";
+import Filters from "../components/Filters";
+import { IGood } from "../types";
 
 const CatalogPage: React.FC = () => {
   const { goodsStore } = useStores();
@@ -20,7 +20,14 @@ const CatalogPage: React.FC = () => {
   }
 
   if (goodsStore.error) {
-    return <Alert message="Ошибка" description={goodsStore.error} type="error" showIcon />;
+    return (
+      <Alert
+        message="Ошибка"
+        description={goodsStore.error}
+        type="error"
+        showIcon
+      />
+    );
   }
 
   return (

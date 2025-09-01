@@ -8,7 +8,7 @@ export interface IGood {
 
 export type DealerId = string;
 
-export type SortMode = 'off' | 'asc' | 'desc';
+export type SortMode = "off" | "asc" | "desc";
 
 export interface WidgetOptions {
   el: string; // селектор, например, '#widget-catalog'

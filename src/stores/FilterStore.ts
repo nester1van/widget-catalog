@@ -1,10 +1,10 @@
-import { makeAutoObservable, reaction } from 'mobx';
-import { DealerId, SortMode } from '../types';
-import { RootStore } from './RootStore';
+import { makeAutoObservable, reaction } from "mobx";
+import { DealerId, SortMode } from "../types";
+import { RootStore } from "./RootStore";
 
 export class FilterStore {
   selectedDealers: DealerId[] = [];
-  priceSort: SortMode = 'off';
+  priceSort: SortMode = "off";
   rootStore: RootStore;
 
   constructor(rootStore: RootStore) {
@@ -21,20 +21,20 @@ export class FilterStore {
       () => {
         this.updateUrl();
         this.rootStore.goodsStore.fetchGoods(this.selectedDealers);
-      }
+      },
     );
   }
 
   toggleDealer(id: DealerId) {
     if (this.selectedDealers.includes(id)) {
-      this.selectedDealers = this.selectedDealers.filter(d => d !== id);
+      this.selectedDealers = this.selectedDealers.filter((d) => d !== id);
     } else {
       this.selectedDealers.push(id);
     }
   }
 
   cyclePriceSort() {
-    const modes: SortMode[] = ['off', 'asc', 'desc'];
+    const modes: SortMode[] = ["off", "asc", "desc"];
     const currentIndex = modes.indexOf(this.priceSort);
     this.priceSort = modes[(currentIndex + 1) % modes.length];
   }
@@ -44,25 +44,33 @@ export class FilterStore {
   }
 
   updateUrl() {
-    const params = new URLSearchParams(window.location.search);
+    const hash = window.location.hash.substring(1);
+    const [pathname] = hash.split("?");
+    const params = new URLSearchParams(
+      window.location.hash.split("?")[1] || "",
+    );
+
     if (this.selectedDealers.length > 0) {
-      params.set('dealers', this.selectedDealers.join(','));
+      params.set("dealers", this.selectedDealers.join(","));
     } else {
-      params.delete('dealers');
+      params.delete("dealers");
     }
-    params.set('sort', this.priceSort);
-    window.history.replaceState({}, '', `${window.location.pathname}?${params}`);
+    params.set("sort", this.priceSort);
+
+    const newHash = `${pathname}?${params.toString()}`;
+    window.history.replaceState(null, "", `#${newHash}`);
   }
 
   loadFromUrl() {
-    const params = new URLSearchParams(window.location.search);
-    const dealers = params.get('dealers');
-    const sort = params.get('sort') as SortMode;
+    const queryString = window.location.hash.split("?")[1] || "";
+    const params = new URLSearchParams(queryString);
+    const dealers = params.get("dealers");
+    const sort = params.get("sort") as SortMode;
 
     if (dealers) {
-      this.selectedDealers = dealers.split(',');
+      this.selectedDealers = dealers.split(",");
     }
-    if (sort && ['off', 'asc', 'desc'].includes(sort)) {
+    if (sort && ["off", "asc", "desc"].includes(sort)) {
       this.priceSort = sort;
     }
   }

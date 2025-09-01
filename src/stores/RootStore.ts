@@ -1,7 +1,7 @@
-import { DealersStore } from './DealersStore';
-import { FilterStore } from './FilterStore';
-import { GoodsStore } from './GoodsStore';
-import { CartStore } from './CartStore';
+import { DealersStore } from "./DealersStore";
+import { FilterStore } from "./FilterStore";
+import { GoodsStore } from "./GoodsStore";
+import { CartStore } from "./CartStore";
 
 export class RootStore {
   dealersStore: DealersStore;
