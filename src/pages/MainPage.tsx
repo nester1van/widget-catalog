@@ -63,7 +63,7 @@ const MainPage: React.FC = () => {
     <div>
       <Title level={2}>Популярные товары</Title>
       <Paragraph>Откройте для себя лучшие инструменты разработки по выгодным ценам</Paragraph>
-      <Carousel {...carouselSettings}>
+      <Carousel {...carouselSettings} className="widget-catalog__carousel">
         {goodsStore.mainCarouselGoods.map((good: IGood) => (
           <div key={good.id}>
             <ProductCard product={good} />
