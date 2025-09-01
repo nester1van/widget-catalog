@@ -1,6 +1,8 @@
 .widget-catalog {
   &__header {
-    // styles for header
+    @media (max-width: 768px) {
+      padding: 0 16px;
+    }
   }
 
   &__content {

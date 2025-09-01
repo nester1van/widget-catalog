@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import { Spin, Alert, Row, Col } from "antd";
+import { Spin, Alert, Row, Col, Typography } from "antd";
 import { useStores } from "../stores/StoreProvider";
 import ProductCard from "../components/ProductCard";
 import Filters from "../components/Filters";
 import { IGood } from "../types";
+
+const { Title, Paragraph } = Typography;
 
 const CatalogPage: React.FC = () => {
   const { goodsStore } = useStores();
@@ -32,7 +34,8 @@ const CatalogPage: React.FC = () => {
 
   return (
     <div>
-      <h1>Каталог</h1>
+      <Title level={2}>Каталог</Title>
+      <Paragraph>Найдите идеальные инструменты для разработки</Paragraph>
       <Filters />
       <Row gutter={[16, 16]}>
         {goodsStore.sortedGoods.map((good: IGood) => (

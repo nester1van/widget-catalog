@@ -1,10 +1,12 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
-import { List, Button, Empty, Typography, InputNumber, Spin } from "antd";
+import { Link } from "react-router-dom";
+import { List, Button, Empty, Typography, InputNumber, Spin, Popconfirm } from "antd";
+import { DeleteOutlined } from '@ant-design/icons';
 import { useStores } from "../stores/StoreProvider";
 import { IGood } from "../types";
 
-const { Title } = Typography;
+const { Title, Paragraph } = Typography;
 
 const CartPage: React.FC = () => {
   const { cartStore, goodsStore } = useStores();
@@ -21,12 +23,25 @@ const CartPage: React.FC = () => {
     .filter((item) => item.product) as { product: IGood; quantity: number }[];
 
   if (cartItems.length === 0) {
-    return <Empty description="Корзина пуста" />;
+    return (<div style={{ display: 'flex', justifyContent: 'center' }}>
+      <Empty 
+        description="Корзина пуста"
+        image={Empty.PRESENTED_IMAGE_SIMPLE}
+      >
+        <p>Добавьте товары из каталога, чтобы сделать заказ</p>
+        <Link to="/catalog">
+          <Button type="default" style={{ marginTop: 16 }}>
+            Перейти в каталог
+          </Button>
+        </Link>
+      </Empty>
+    </div>);
   }
 
   return (
     <div>
       <Title level={2}>Корзина</Title>
+      <Paragraph>Проверьте выбранные товары перед оформлением заказа</Paragraph>
       <List
         itemLayout="horizontal"
         dataSource={cartItems}
@@ -77,9 +92,18 @@ const CartPage: React.FC = () => {
         )}
       />
       <Title level={4}>Итого: {cartStore.totalPrice.toFixed(2)}</Title>
-      <Button type="primary" danger onClick={() => cartStore.clearCart()}>
-        Очистить корзину
-      </Button>
+      <Popconfirm
+        title="Очистить корзину?"
+        description="Все товары будут удалены из корзины"
+        onConfirm={() => cartStore.clearCart()}
+        okText="Очистить"
+        cancelText="Отмена"
+        okType="danger"
+      >
+        <Button type="primary" danger icon={<DeleteOutlined />}>
+          Очистить корзину
+        </Button>
+      </Popconfirm>
     </div>
   );
 };

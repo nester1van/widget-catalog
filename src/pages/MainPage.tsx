@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { observer } from "mobx-react-lite";
-import { Carousel, Spin, Alert } from "antd";
+import { Button, Carousel, Spin, Alert, Typography } from "antd";
 import { useStores } from "../stores/StoreProvider";
 import ProductCard from "../components/ProductCard";
 import { IGood } from "../types";
+
+const { Title, Paragraph } = Typography;
 
 const MainPage: React.FC = () => {
   const { goodsStore, dealersStore } = useStores();
@@ -56,7 +59,8 @@ const MainPage: React.FC = () => {
 
   return (
     <div>
-      <h1>Главная страница</h1>
+      <Title level={2}>Популярные товары</Title>
+      <Paragraph>Откройте для себя лучшие инструменты разработки по выгодным ценам</Paragraph>
       <Carousel {...carouselSettings}>
         {goodsStore.mainCarouselGoods.map((good: IGood) => (
           <div key={good.id}>
@@ -64,6 +68,13 @@ const MainPage: React.FC = () => {
           </div>
         ))}
       </Carousel>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Link to="/catalog">
+          <Button type="default" style={{ marginTop: 16 }}>
+            Смотреть весь каталог
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 };
