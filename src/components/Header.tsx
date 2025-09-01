@@ -21,7 +21,9 @@ const Header: React.FC = () => {
       key: "/cart",
       label: (
         <Link to="/cart">
-          <Badge count={cartStore.totalQuantity}>Корзина</Badge>
+          <Badge count={cartStore.totalQuantity} offset={[10, -5]}>
+            <span style={{ color: "white" }}>Корзина</span>
+          </Badge>
         </Link>
       ),
     },

@@ -50,6 +50,15 @@ export class CartStore {
     this.saveToStorage();
   }
 
+  updateItemQuantity(id: string, quantity: number) {
+    if (quantity > 0) {
+      this.items.set(id, quantity);
+    } else {
+      this.items.delete(id);
+    }
+    this.saveToStorage();
+  }
+
   get totalQuantity() {
     return Array.from(this.items.values()).reduce(
       (sum, count) => sum + count,

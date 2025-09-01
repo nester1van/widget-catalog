@@ -1,6 +1,6 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
-import { List, Button, Empty, Typography } from "antd";
+import { List, Button, Empty, Typography, InputNumber, Spin } from "antd";
 import { useStores } from "../stores/StoreProvider";
 import { IGood } from "../types";
 
@@ -8,6 +8,10 @@ const { Title } = Typography;
 
 const CartPage: React.FC = () => {
   const { cartStore, goodsStore } = useStores();
+
+  if (goodsStore.loading) {
+    return <Spin />;
+  }
 
   const cartItems = Array.from(cartStore.items.entries())
     .map(([id, quantity]) => {
@@ -30,6 +34,31 @@ const CartPage: React.FC = () => {
           <List.Item
             key={item.product.id}
             actions={[
+              <div
+                style={{ display: "flex", alignItems: "center" }}
+                key={`quantity-${item.product.id}`}
+              >
+                <Button
+                  onClick={() => cartStore.decrement(item.product.id)}
+                  disabled={item.quantity <= 1}
+                >
+                  -
+                </Button>
+                <InputNumber
+                  min={1}
+                  value={item.quantity}
+                  onChange={(value) =>
+                    cartStore.updateItemQuantity(
+                      item.product.id,
+                      value as number,
+                    )
+                  }
+                  style={{ margin: "0 8px", width: "60px" }}
+                />
+                <Button onClick={() => cartStore.increment(item.product.id)}>
+                  +
+                </Button>
+              </div>,
               <Button
                 key={`delete-${item.product.id}`}
                 type="primary"
@@ -44,7 +73,6 @@ const CartPage: React.FC = () => {
               title={item.product.name}
               description={`Цена: ${item.product.price}`}
             />
-            <div>Количество: {item.quantity}</div>
           </List.Item>
         )}
       />
