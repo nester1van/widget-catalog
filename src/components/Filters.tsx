@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Tag } from 'antd';
 import { observer } from 'mobx-react-lite';
-import { useStores } from '../stores';
+import { useStores } from '@/stores/StoreProvider';
 
 const { CheckableTag } = Tag;
 

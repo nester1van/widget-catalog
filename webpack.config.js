@@ -4,6 +4,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
+const isProd = process.env.NODE_ENV === 'production';
+const isDev = !isProd;
+
 module.exports = {
   entry: path.resolve(__dirname, 'src', 'index.tsx'),
   output: {
@@ -11,32 +14,73 @@ module.exports = {
     filename: 'widget-catalog.js',
     library: {
       name: 'WidgetCatalog',
-      type: 'umd',
+      type: 'window',
       export: 'default'
     },
-    globalObject: 'this'
+  },
+  devtool: isDev ? 'source-map' : false,
+  devServer: {
+    port: 3003,
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx']
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.scss'],
+    modules: ['node_modules'],
+    alias: {
+      '@': path.join(__dirname, 'src'),
+    },
   },
-  externals: {},
   module: {
     rules: [
-      { test: /\.tsx?$/, loader: 'ts-loader', exclude: /node_modules/ },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            sourceMap: isDev,
+          },
+        },
+      },
+      {
+        test: /\.module\.s(a|c)ss$/,
         use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'style-loader',
+            options: {
+              injectType: 'singletonStyleTag',
+            },
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[local]___[hash:base64:5]',
+              },
+              sourceMap: isDev,
+              importLoaders: 1,
+            },
+          },
           {
             loader: 'sass-loader',
-            options: {
-              implementation: require('sass'),
-            },
           },
         ],
       },
-      { test: /\.css$/i, use: [MiniCssExtractPlugin.loader, 'css-loader'] },
+      {
+        test: /\.(s?(a|c)ss)$/,
+        exclude: /\.module\.(s(a|c)ss)$/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              injectType: 'singletonStyleTag',
+            },
+          },
+          'css-loader',
+          {
+            loader: 'sass-loader',
+          },
+        ],
+      },
       { test: /\.(png|jpe?g|gif|svg)$/, type: 'asset/resource' }
     ]
   },
@@ -44,7 +88,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({ filename: 'widget-catalog.css' }),
     new ForkTsCheckerWebpackPlugin(),
-    new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'public', 'index.html'), inject: true })
+    new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'public', 'index.html') })
   ],
   devServer: {
     static: path.resolve(__dirname, 'public'),

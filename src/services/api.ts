@@ -1,5 +1,7 @@
 import { IGood, DealerId } from '../types';
-import { API_BASE_URL, ASSETS_BASE_URL } from '../config';
+
+const API_BASE_URL = 'https://test-frontend.dev.int.perx.ru/api';
+const ASSETS_BASE_URL = 'https://test-frontend.dev.int.perx.ru';
 
 async function request<T>(url: string): Promise<T> {
   const res = await fetch(url);

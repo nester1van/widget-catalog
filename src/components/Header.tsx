@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Menu, Badge } from 'antd';
 import { observer } from 'mobx-react-lite';
-import { useStores } from '../stores';
+import { useStores } from '@/stores/StoreProvider';
 import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {

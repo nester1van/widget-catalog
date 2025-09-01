@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { getDealers } from './services/api';
 
 interface Props {
   initialDealers?: string[] | undefined;
 }
 
 const App: React.FC<Props> = ({ initialDealers }) => {
+
   return (
     <div className="widget-catalog__root">
       <div style={{ padding: 16 }}>
