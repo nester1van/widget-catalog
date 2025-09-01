@@ -36,7 +36,9 @@ const MainPage: React.FC = () => {
   }
 
   const carouselSettings = {
-    dots: true,
+    arrows: true,
+    dragable: true,
+    autoplay: true,
     infinite: true,
     speed: 500,
     slidesToShow: 5,
