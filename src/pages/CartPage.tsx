@@ -9,6 +9,8 @@ import {
   InputNumber,
   Spin,
   Popconfirm,
+  Row,
+  Col,
 } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import { useStores } from "../stores/StoreProvider";
@@ -32,16 +34,21 @@ const CartPage: React.FC = () => {
 
   if (cartItems.length === 0) {
     return (
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <Empty description="Корзина пуста" image={Empty.PRESENTED_IMAGE_SIMPLE}>
-          <p>Добавьте товары из каталога, чтобы сделать заказ</p>
-          <Link to="/catalog">
-            <Button type="default" style={{ marginTop: 16 }}>
-              Перейти в каталог
-            </Button>
-          </Link>
-        </Empty>
-      </div>
+      <Row justify="center" className="widget-catalog__cart-empty">
+        <Col>
+          <Empty
+            description="Корзина пуста"
+            image={Empty.PRESENTED_IMAGE_SIMPLE}
+          >
+            <p>Добавьте товары из каталога, чтобы сделать заказ</p>
+            <Link to="/catalog">
+              <Button type="default" style={{ marginTop: 16 }}>
+                Перейти в каталог
+              </Button>
+            </Link>
+          </Empty>
+        </Col>
+      </Row>
     );
   }
 
@@ -57,7 +64,7 @@ const CartPage: React.FC = () => {
             key={item.product.id}
             actions={[
               <div
-                style={{ display: "flex", alignItems: "center" }}
+                className="widget-catalog__cart-actions"
                 key={`quantity-${item.product.id}`}
               >
                 <Button
@@ -75,7 +82,7 @@ const CartPage: React.FC = () => {
                       value as number,
                     )
                   }
-                  style={{ margin: "0 8px", width: "60px" }}
+                  className="widget-catalog__cart-input"
                 />
                 <Button onClick={() => cartStore.increment(item.product.id)}>
                   +

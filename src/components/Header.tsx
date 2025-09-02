@@ -16,21 +16,21 @@ const Header: React.FC = () => {
   const items = [
     {
       key: "/",
-      icon: <HomeOutlined style={{ color: "white" }} />,
+      icon: <HomeOutlined />,
       label: <Link to="/">Главная</Link>,
     },
     {
       key: "/catalog",
-      icon: <AppstoreOutlined style={{ color: "white" }} />,
+      icon: <AppstoreOutlined />,
       label: <Link to="/catalog">Каталог</Link>,
     },
     {
       key: "/cart",
-      icon: <ShoppingCartOutlined style={{ color: "white" }} />,
+      icon: <ShoppingCartOutlined />,
       label: (
-        <Link to="/cart">
+        <Link to="/cart" className="widget-catalog__cart-link">
           <Badge count={cartStore.totalQuantity} offset={[10, -5]}>
-            <span style={{ color: "white" }}>Корзина</span>
+            <span>Корзина</span>
           </Badge>
         </Link>
       ),

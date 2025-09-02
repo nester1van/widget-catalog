@@ -65,4 +65,46 @@ $ant-prefix: ant-widget !default;
       color: #212121;
     }
   }
+
+  &__cart {
+    &-empty {
+      display: flex;
+      justify-content: center;
+    }
+
+    &-actions {
+      display: flex;
+      align-items: center;
+    }
+
+    &-input {
+      margin: 0 8px;
+      width: 60px;
+    }
+  }
+
+  &__main {
+    &-button-wrapper {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &__header {
+    .#{$ant-prefix}-menu-item-icon {
+      color: white;
+    }
+
+    .#{$ant-prefix}-badge .#{$ant-prefix}-badge-count {
+      color: white;
+    }
+
+    .widget-catalog__cart-link span {
+      color: rgba(255, 255, 255, 0.682);
+      &:hover {
+        color: white;
+        transition: color 0.5s;
+      }
+    }
+  }
 }

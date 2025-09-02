@@ -63,7 +63,7 @@ const MainPage: React.FC = () => {
           </div>
         ))}
       </Carousel>
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div className="widget-catalog__main-button-wrapper">
         <Link to="/catalog">
           <Button type="default" style={{ marginTop: 16 }}>
             Смотреть весь каталог
