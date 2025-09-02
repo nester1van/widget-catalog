@@ -13,8 +13,8 @@ import {
   Col,
 } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
-import { useStores } from "../stores/StoreProvider";
-import { IGood } from "../types";
+import { useStores } from "@/stores/StoreProvider";
+import { IGood } from "@/types";
 
 const { Title, Paragraph } = Typography;
 
