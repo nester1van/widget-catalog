@@ -93,7 +93,9 @@ const CartPage: React.FC = () => {
           >
             <List.Item.Meta
               title={item.product.name}
-              description={`Цена: ${item.product.price}`}
+              description={`Цена: ${item.product.price} x ${item.quantity} = ${(
+                item.product.price * item.quantity
+              ).toFixed(2)}`}
             />
           </List.Item>
         )}
