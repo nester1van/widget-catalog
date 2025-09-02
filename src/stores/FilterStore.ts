@@ -11,8 +11,6 @@ export class FilterStore {
     makeAutoObservable(this);
     this.rootStore = rootStore;
 
-    this.loadFromUrl();
-
     reaction(
       () => ({
         dealers: this.selectedDealers.slice(),
@@ -20,7 +18,7 @@ export class FilterStore {
       }),
       () => {
         this.updateUrl();
-        this.rootStore.goodsStore.fetchGoods(this.selectedDealers);
+        // Товары теперь запрашиваются на уровне страницы каталога
       },
     );
   }
@@ -41,9 +39,6 @@ export class FilterStore {
 
   setSelectedDealers(ids: DealerId[]) {
     this.selectedDealers = ids;
-    runInAction(() => {
-      this.rootStore.goodsStore.fetchGoods(this.selectedDealers);
-    });
   }
 
   updateUrl() {

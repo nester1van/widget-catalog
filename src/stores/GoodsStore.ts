@@ -4,7 +4,8 @@ import { IGood, DealerId } from "@/types";
 import { RootStore } from "@/stores/RootStore";
 
 export class GoodsStore {
-  goods: IGood[] = [];
+  goods: IGood[] = []; // Все товары, загруженные при инициализации
+  filteredGoods: IGood[] = []; // Товары для каталога, могут меняться при фильтрации
   loading = false;
   error: string | null = null;
   rootStore: RootStore;
@@ -14,13 +15,31 @@ export class GoodsStore {
     this.rootStore = rootStore;
   }
 
-  async fetchGoods(dealers?: DealerId[]) {
+  async fetchInitialGoods(dealers?: DealerId[]) {
     this.loading = true;
     this.error = null;
     try {
       const goods = await getGoods(dealers);
       runInAction(() => {
         this.goods = goods;
+        this.filteredGoods = goods; // Изначально показываем все товары
+        this.loading = false;
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.error = error instanceof Error ? error.message : String(error);
+        this.loading = false;
+      });
+    }
+  }
+
+  async fetchGoods(dealers?: DealerId[]) {
+    this.loading = true;
+    this.error = null;
+    try {
+      const goods = await getGoods(dealers);
+      runInAction(() => {
+        this.filteredGoods = goods;
         this.loading = false;
       });
     } catch (error) {
@@ -34,9 +53,9 @@ export class GoodsStore {
   get sortedGoods() {
     const { priceSort } = this.rootStore.filterStore;
     if (priceSort === "off") {
-      return this.goods;
+      return this.filteredGoods;
     }
-    return [...this.goods].sort((a, b) => {
+    return [...this.filteredGoods].sort((a, b) => {
       return priceSort === "asc" ? a.price - b.price : b.price - a.price;
     });
   }

@@ -22,15 +22,18 @@ class WidgetCatalog {
     }
     const root = createRoot(el as HTMLElement);
     const rootStore = new RootStore(this.opts.dealers);
-    root.render(
-      <StoreProvider store={rootStore}>
-        <Router>
-          <ConfigProvider prefixCls="ant-widget">
-            <App />
-          </ConfigProvider>
-        </Router>
-      </StoreProvider>,
-    );
+
+    rootStore.init().then(() => {
+      root.render(
+        <StoreProvider store={rootStore}>
+          <Router>
+            <ConfigProvider prefixCls="ant-widget">
+              <App />
+            </ConfigProvider>
+          </Router>
+        </StoreProvider>,
+      );
+    });
   };
 }
 
@@ -38,3 +41,4 @@ export default WidgetCatalog;
 
 // @ts-expect-error: Attaching to window for async load
 if (typeof window !== "undefined") window.WidgetCatalog = WidgetCatalog;
+// This part is now inside the .then() block

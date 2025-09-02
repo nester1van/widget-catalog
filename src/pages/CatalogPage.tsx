@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { Spin, Alert, Row, Col, Typography } from "antd";
 import { useStores } from "@/stores/StoreProvider";
+import { reaction } from "mobx";
 import ProductCard from "@/components/ProductCard";
 import Filters from "@/components/Filters";
 import { IGood } from "@/types";
@@ -9,7 +10,23 @@ import { IGood } from "@/types";
 const { Title, Paragraph } = Typography;
 
 const CatalogPage: React.FC = () => {
-  const { goodsStore } = useStores();
+  const { goodsStore, filterStore } = useStores();
+
+  useEffect(() => {
+    // При монтировании компонента и при изменении selectedDealers
+    // мы будем запрашивать товары.
+    const disposer = reaction(
+      () => filterStore.selectedDealers.slice(),
+      (dealers) => {
+        goodsStore.fetchGoods(dealers);
+      },
+      { fireImmediately: true }, // fireImmediately, чтобы запустить при монтировании
+    );
+
+    return () => {
+      disposer(); // Очистка при размонтировании
+    };
+  }, [goodsStore, filterStore]);
 
   if (goodsStore.loading) {
     return <Spin size="large" />;

@@ -1,26 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { Layout } from "antd";
 import Header from "@/components/Header";
 import MainPage from "@/pages/MainPage";
 import CatalogPage from "@/pages/CatalogPage";
 import CartPage from "@/pages/CartPage";
-import { useStores } from "@/stores/StoreProvider";
 
 const { Content } = Layout;
 
 const App: React.FC = () => {
-  const { goodsStore, dealersStore } = useStores();
-
-  useEffect(() => {
-    if (!dealersStore.dealers.length) {
-      dealersStore.fetchDealers();
-    }
-    if (!goodsStore.goods.length) {
-      goodsStore.fetchGoods();
-    }
-  }, [dealersStore, goodsStore]);
-
   return (
     <Layout>
       <Header />

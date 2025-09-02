@@ -3,6 +3,7 @@ import { getDealers } from "@/services/api";
 import { DealerId } from "@/types";
 
 export class DealersStore {
+  initialDealers: DealerId[] = [];
   dealers: DealerId[] = [];
   loading = false;
   error: string | null = null;

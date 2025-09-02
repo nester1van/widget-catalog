@@ -28,7 +28,7 @@ const Filters: React.FC = () => {
   return (
     <div className="widget-catalog__filters">
       <div>
-        {dealersStore.dealers.map((dealerId) => (
+        {dealersStore.initialDealers.map((dealerId) => (
           <CheckableTag
             key={dealerId}
             checked={filterStore.selectedDealers.includes(dealerId)}
