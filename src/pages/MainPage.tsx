@@ -62,7 +62,9 @@ const MainPage: React.FC = () => {
   return (
     <div>
       <Title level={2}>Популярные товары</Title>
-      <Paragraph>Откройте для себя лучшие инструменты разработки по выгодным ценам</Paragraph>
+      <Paragraph>
+        Откройте для себя лучшие инструменты разработки по выгодным ценам
+      </Paragraph>
       <Carousel {...carouselSettings} className="widget-catalog__carousel">
         {goodsStore.mainCarouselGoods.map((good: IGood) => (
           <div key={good.id}>
@@ -70,7 +72,7 @@ const MainPage: React.FC = () => {
           </div>
         ))}
       </Carousel>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
         <Link to="/catalog">
           <Button type="default" style={{ marginTop: 16 }}>
             Смотреть весь каталог

@@ -1,10 +1,10 @@
 import React from "react";
 import { Layout, Menu, Badge } from "antd";
-import { 
+import {
   HomeOutlined,
-  AppstoreOutlined, 
-  ShoppingCartOutlined 
-} from '@ant-design/icons';
+  AppstoreOutlined,
+  ShoppingCartOutlined,
+} from "@ant-design/icons";
 import { observer } from "mobx-react-lite";
 import { useStores } from "@/stores/StoreProvider";
 import { Link, useLocation } from "react-router-dom";

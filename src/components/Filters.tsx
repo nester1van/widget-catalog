@@ -2,20 +2,23 @@ import React from "react";
 import { Button, Tag } from "antd";
 import { observer } from "mobx-react-lite";
 import { useStores } from "@/stores/StoreProvider";
-import { 
-  CaretUpOutlined, 
-  CaretDownOutlined, 
-  SwapOutlined 
-} from '@ant-design/icons';
+import {
+  CaretUpOutlined,
+  CaretDownOutlined,
+  SwapOutlined,
+} from "@ant-design/icons";
 import { SortMode } from "@/types";
 
 const { CheckableTag } = Tag;
 
 const getSortIcon = (sortMode: SortMode) => {
-  switch(sortMode) {
-    case 'asc': return <CaretUpOutlined />;
-    case 'desc': return <CaretDownOutlined />;
-    default: return <SwapOutlined />;
+  switch (sortMode) {
+    case "asc":
+      return <CaretUpOutlined />;
+    case "desc":
+      return <CaretDownOutlined />;
+    default:
+      return <SwapOutlined />;
   }
 };
 

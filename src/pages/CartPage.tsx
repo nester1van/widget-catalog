@@ -1,8 +1,16 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
-import { List, Button, Empty, Typography, InputNumber, Spin, Popconfirm } from "antd";
-import { DeleteOutlined } from '@ant-design/icons';
+import {
+  List,
+  Button,
+  Empty,
+  Typography,
+  InputNumber,
+  Spin,
+  Popconfirm,
+} from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
 import { useStores } from "../stores/StoreProvider";
 import { IGood } from "../types";
 
@@ -23,19 +31,18 @@ const CartPage: React.FC = () => {
     .filter((item) => item.product) as { product: IGood; quantity: number }[];
 
   if (cartItems.length === 0) {
-    return (<div style={{ display: 'flex', justifyContent: 'center' }}>
-      <Empty 
-        description="Корзина пуста"
-        image={Empty.PRESENTED_IMAGE_SIMPLE}
-      >
-        <p>Добавьте товары из каталога, чтобы сделать заказ</p>
-        <Link to="/catalog">
-          <Button type="default" style={{ marginTop: 16 }}>
-            Перейти в каталог
-          </Button>
-        </Link>
-      </Empty>
-    </div>);
+    return (
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Empty description="Корзина пуста" image={Empty.PRESENTED_IMAGE_SIMPLE}>
+          <p>Добавьте товары из каталога, чтобы сделать заказ</p>
+          <Link to="/catalog">
+            <Button type="default" style={{ marginTop: 16 }}>
+              Перейти в каталог
+            </Button>
+          </Link>
+        </Empty>
+      </div>
+    );
   }
 
   return (
