@@ -3,7 +3,6 @@ export interface IGood {
   name: string;
   price: number;
   image: string;
-  dealerId?: string;
 }
 
 export type DealerId = string;

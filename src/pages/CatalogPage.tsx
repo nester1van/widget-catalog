@@ -11,12 +11,6 @@ const { Title, Paragraph } = Typography;
 const CatalogPage: React.FC = () => {
   const { goodsStore } = useStores();
 
-  useEffect(() => {
-    if (!goodsStore.goods.length) {
-      goodsStore.fetchGoods();
-    }
-  }, [goodsStore]);
-
   if (goodsStore.loading) {
     return <Spin size="large" />;
   }

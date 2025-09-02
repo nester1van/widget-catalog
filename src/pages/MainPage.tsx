@@ -11,15 +11,6 @@ const { Title, Paragraph } = Typography;
 const MainPage: React.FC = () => {
   const { goodsStore, dealersStore } = useStores();
 
-  useEffect(() => {
-    if (!dealersStore.dealers.length) {
-      dealersStore.fetchDealers();
-    }
-    if (!goodsStore.goods.length) {
-      goodsStore.fetchGoods();
-    }
-  }, [dealersStore, goodsStore]);
-
   if (goodsStore.loading || dealersStore.loading) {
     return <Spin size="large" />;
   }

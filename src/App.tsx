@@ -10,11 +10,16 @@ import { useStores } from "@/stores/StoreProvider";
 const { Content } = Layout;
 
 const App: React.FC = () => {
-  const { goodsStore } = useStores();
+  const { goodsStore, dealersStore } = useStores();
 
   useEffect(() => {
-    goodsStore.fetchGoods();
-  }, [goodsStore]);
+    if (!dealersStore.dealers.length) {
+      dealersStore.fetchDealers();
+    }
+    if (!goodsStore.goods.length) {
+      goodsStore.fetchGoods();
+    }
+  }, [dealersStore, goodsStore]);
 
   return (
     <Layout>

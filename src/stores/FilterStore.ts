@@ -1,4 +1,4 @@
-import { makeAutoObservable, reaction } from "mobx";
+import { makeAutoObservable, reaction, runInAction } from "mobx";
 import { DealerId, SortMode } from "@/types";
 import { RootStore } from "@/stores/RootStore";
 
@@ -41,6 +41,9 @@ export class FilterStore {
 
   setSelectedDealers(ids: DealerId[]) {
     this.selectedDealers = ids;
+    runInAction(() => {
+      this.rootStore.goodsStore.fetchGoods(this.selectedDealers);
+    });
   }
 
   updateUrl() {
