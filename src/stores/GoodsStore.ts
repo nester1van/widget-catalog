@@ -41,10 +41,21 @@ export class GoodsStore {
     });
   }
 
+  /**
+   * Возвращает список товаров для главной карусели.
+   * Фильтрует товары с ценой больше или равной 10.
+   * Если отфильтрованный список содержит менее 8 элементов,
+   * он дополняет список дополнительными товарами из общего списка,
+   * пока не наберется 8 элементов, исключая дубликаты из уже отфильтрованных товаров.
+   */
   get mainCarouselGoods() {
     const filtered = this.goods.filter((item) => item.price >= 10);
-    if (filtered.length < 5) {
-      return this.goods.slice(0, 8);
+    if (filtered.length < 8) {
+      const needed = 8 - filtered.length;
+      const additionalGoods = this.goods.filter(
+        (item) => !filtered.some((fItem) => fItem.id === item.id)
+      ).slice(0, needed);
+      return [...filtered, ...additionalGoods];
     }
     return filtered;
   }

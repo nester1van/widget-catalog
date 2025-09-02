@@ -45,13 +45,13 @@ describe("FilterStore", () => {
     filterStore.toggleDealer("dealer1");
     filterStore.cyclePriceSort();
 
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(window.location.hash.split("?")[1] || "");
     expect(params.get("dealers")).toBe("dealer1");
     expect(params.get("sort")).toBe("asc");
   });
 
   it("should load filters from URL on initialization", () => {
-    window.history.replaceState({}, "", "?dealers=d1,d2&sort=desc");
+    window.history.replaceState({}, "", "#/?dealers=d1,d2&sort=desc");
     const filterStore = new FilterStore(rootStore);
 
     expect(filterStore.selectedDealers).toEqual(["d1", "d2"]);

@@ -52,37 +52,49 @@ describe("GoodsStore", () => {
     expect(sorted.map((g) => g.id)).toEqual(["1", "2", "3", "4"]);
   });
 
-  it("should return main carousel goods with price >= 10", () => {
+
+  it("should return 8 carousel goods, supplementing with other goods if filtered are less than 8", () => {
     const goodsStore = new GoodsStore(rootStore);
     goodsStore.goods = [
-      ...mockGoods,
-      { id: "5", name: "E", price: 25, image: "" },
-      { id: "6", name: "F", price: 30, image: "" },
+      { id: "1", name: "A", price: 10, image: "" }, // filtered
+      { id: "2", name: "B", price: 20, image: "" }, // filtered
+      { id: "3", name: "C", price: 5, image: "" },
+      { id: "4", name: "D", price: 15, image: "" }, // filtered
+      { id: "5", name: "E", price: 1, image: "" },
+      { id: "6", name: "F", price: 2, image: "" },
+      { id: "7", name: "G", price: 3, image: "" },
+      { id: "8", name: "H", price: 4, image: "" },
+      { id: "9", name: "I", price: 6, image: "" },
+      { id: "10", name: "J", price: 7, image: "" },
     ];
 
     const carouselGoods = goodsStore.mainCarouselGoods;
-    expect(carouselGoods.length).toBe(5);
-    expect(carouselGoods.every((g) => g.price >= 10)).toBe(true);
+    expect(carouselGoods.length).toBe(8);
+    // Ensure filtered items are included and then supplemented
+    expect(carouselGoods.some((g) => g.id === "1")).toBe(true);
+    expect(carouselGoods.some((g) => g.id === "2")).toBe(true);
+    expect(carouselGoods.some((g) => g.id === "4")).toBe(true);
+    // Check that other items are added to reach 8
+    expect(carouselGoods.some((g) => g.id === "3")).toBe(true);
+    expect(carouselGoods.some((g) => g.id === "5")).toBe(true);
+    expect(carouselGoods.some((g) => g.id === "6")).toBe(true);
+    expect(carouselGoods.some((g) => g.id === "7")).toBe(true);
+    expect(carouselGoods.some((g) => g.id === "8")).toBe(true);
+    expect(carouselGoods.some((g) => g.id === "9")).toBe(false); // Should not be included as we only need 5 more
   });
 
-  it("should return fallback carousel goods if not enough items >= 10", () => {
-    const goodsStore = new GoodsStore(rootStore);
-    goodsStore.goods = mockGoods; // Only 3 items >= 10
-
-    const carouselGoods = goodsStore.mainCarouselGoods;
-    expect(carouselGoods.length).toBe(4); // All goods
-  });
-
-  it("should return first 8 items for fallback if more than 8 exist", () => {
+  it("should return first 8 items if no items meet the price criteria", () => {
     const goodsStore = new GoodsStore(rootStore);
     goodsStore.goods = Array.from({ length: 10 }, (_, i) => ({
       id: `${i}`,
       name: `G${i}`,
-      price: 1,
+      price: 1, // All prices less than 10
       image: "",
     }));
 
     const carouselGoods = goodsStore.mainCarouselGoods;
     expect(carouselGoods.length).toBe(8);
+    expect(carouselGoods.every((g) => g.price === 1)).toBe(true);
+    expect(carouselGoods.map((g) => g.id)).toEqual(["0", "1", "2", "3", "4", "5", "6", "7"]);
   });
 });
