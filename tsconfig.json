@@ -13,9 +13,7 @@
      ]
    },
    "types": [
-     "node",
-     "react/next",
-     "react-dom/next",
+     "node"
    ],
    "allowJs": true,
    "skipLibCheck": true,
