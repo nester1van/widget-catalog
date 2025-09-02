@@ -19,7 +19,7 @@ $ant-prefix: ant-widget !default;
   &__inner-content {
     background: #fff;
     padding: 24px;
-    min-height: 380px;
+    min-height: calc(100vh - 128px);
   }
 
   &__product-card {
