@@ -1,3 +1,5 @@
+$ant-prefix: ant-widget !default;
+
 .widget-catalog {
   &__header {
     @media (max-width: 768px) {
@@ -27,7 +29,7 @@
     flex-direction: column;
     justify-content: space-between;
 
-    .ant-card-cover {
+    .#{$ant-prefix}-card-cover {
       padding: 20px;
     }
 
@@ -36,7 +38,7 @@
       object-fit: contain;
     }
 
-    .ant-card-body {
+    .#{$ant-prefix}-card-body {
       display: flex;
       flex-direction: column;
       justify-content: space-between;

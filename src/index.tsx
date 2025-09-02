@@ -1,6 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { HashRouter as Router } from "react-router-dom";
+import { ConfigProvider } from "antd";
 import App from "./App";
 import { WidgetOptions } from "./types";
 import "./styles/main.scss";
@@ -24,7 +25,9 @@ class WidgetCatalog {
     root.render(
       <StoreProvider store={rootStore}>
         <Router>
-          <App />
+          <ConfigProvider prefixCls="ant-widget">
+            <App />
+          </ConfigProvider>
         </Router>
       </StoreProvider>,
     );
