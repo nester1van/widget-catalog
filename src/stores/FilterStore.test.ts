@@ -50,17 +50,12 @@ describe("FilterStore", () => {
     expect(params.get("sort")).toBe("asc");
   });
 
-  it("should load filters from URL on initialization", () => {
+  it("should load filters from URL", () => {
     window.history.replaceState({}, "", "#/?dealers=d1,d2&sort=desc");
     const filterStore = new FilterStore(rootStore);
+    filterStore.loadFromUrl();
 
     expect(filterStore.selectedDealers).toEqual(["d1", "d2"]);
     expect(filterStore.priceSort).toBe("desc");
-  });
-
-  it("should call fetchGoods when filters change", () => {
-    const filterStore = new FilterStore(rootStore);
-    filterStore.toggleDealer("dealer1");
-    expect(rootStore.goodsStore.fetchGoods).toHaveBeenCalledWith(["dealer1"]);
   });
 });

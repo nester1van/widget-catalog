@@ -1,6 +1,14 @@
 import { CartStore } from "@/stores/CartStore";
 import { RootStore } from "@/stores/RootStore";
 
+jest.mock("./RootStore", () => ({
+  RootStore: jest.fn(() => ({
+    goodsStore: {
+      goods: [],
+    },
+  })),
+}));
+
 const CART_TTL = 10 * 60 * 1000;
 
 describe("CartStore", () => {
@@ -65,6 +73,18 @@ describe("CartStore", () => {
     cartStore.increment("item1");
     cartStore.addItem("item2");
     expect(cartStore.totalQuantity).toBe(3);
+  });
+
+  it("should calculate total price correctly", () => {
+    rootStore.goodsStore.goods = [
+      { id: "item1", name: "A", price: 10, image: "" },
+      { id: "item2", name: "B", price: 20, image: "" },
+    ];
+    const cartStore = new CartStore(rootStore);
+    cartStore.addItem("item1");
+    cartStore.increment("item1"); // 2 * 10
+    cartStore.addItem("item2");   // 1 * 20
+    expect(cartStore.totalPrice).toBe(40);
   });
 
   it("should save to and load from localStorage", () => {

@@ -28,7 +28,7 @@ describe("GoodsStore", () => {
   it("should sort goods by price ascending", () => {
     rootStore.filterStore.priceSort = "asc";
     const goodsStore = new GoodsStore(rootStore);
-    goodsStore.goods = [...mockGoods];
+    goodsStore.filteredGoods = [...mockGoods];
 
     const sorted = goodsStore.sortedGoods;
     expect(sorted.map((g) => g.id)).toEqual(["3", "1", "4", "2"]);
@@ -37,7 +37,7 @@ describe("GoodsStore", () => {
   it("should sort goods by price descending", () => {
     rootStore.filterStore.priceSort = "desc";
     const goodsStore = new GoodsStore(rootStore);
-    goodsStore.goods = [...mockGoods];
+    goodsStore.filteredGoods = [...mockGoods];
 
     const sorted = goodsStore.sortedGoods;
     expect(sorted.map((g) => g.id)).toEqual(["2", "4", "1", "3"]);
@@ -46,7 +46,7 @@ describe("GoodsStore", () => {
   it("should return unsorted goods when sort is off", () => {
     rootStore.filterStore.priceSort = "off";
     const goodsStore = new GoodsStore(rootStore);
-    goodsStore.goods = [...mockGoods];
+    goodsStore.filteredGoods = [...mockGoods];
 
     const sorted = goodsStore.sortedGoods;
     expect(sorted.map((g) => g.id)).toEqual(["1", "2", "3", "4"]);
