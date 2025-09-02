@@ -1,5 +1,5 @@
-import { FilterStore } from "./FilterStore";
-import { RootStore } from "./RootStore";
+import { FilterStore } from "@/stores/FilterStore";
+import { RootStore } from "@/stores/RootStore";
 
 // Mock RootStore and its dependencies
 jest.mock("./RootStore", () => ({

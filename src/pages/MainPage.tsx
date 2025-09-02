@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { Button, Carousel, Spin, Alert, Typography } from "antd";
-import { useStores } from "../stores/StoreProvider";
-import ProductCard from "../components/ProductCard";
-import { IGood } from "../types";
+import { useStores } from "@/stores/StoreProvider";
+import ProductCard from "@/components/ProductCard";
+import { IGood } from "@/types";
 
 const { Title, Paragraph } = Typography;
 

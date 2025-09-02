@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { StoreProvider, useStores } from "./StoreProvider";
-import { RootStore } from "./RootStore";
+import { StoreProvider, useStores } from "@/stores/StoreProvider";
+import { RootStore } from "@/stores/RootStore";
 
 describe("StoreProvider", () => {
   it("should provide the store to child components", () => {

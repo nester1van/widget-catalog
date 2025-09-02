@@ -1,5 +1,5 @@
-import { CartStore } from "./CartStore";
-import { RootStore } from "./RootStore";
+import { CartStore } from "@/stores/CartStore";
+import { RootStore } from "@/stores/RootStore";
 
 const CART_TTL = 10 * 60 * 1000;
 

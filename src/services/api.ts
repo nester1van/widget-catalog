@@ -1,4 +1,4 @@
-import { IGood, DealerId } from "../types";
+import { IGood, DealerId } from "@/types";
 
 const API_BASE_URL = "https://test-frontend.dev.int.perx.ru/api";
 const ASSETS_BASE_URL = "https://test-frontend.dev.int.perx.ru";

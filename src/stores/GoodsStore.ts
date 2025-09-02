@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { getGoods } from "../services/api";
-import { IGood, DealerId } from "../types";
-import { RootStore } from "./RootStore";
+import { getGoods } from "@/services/api";
+import { IGood, DealerId } from "@/types";
+import { RootStore } from "@/stores/RootStore";
 
 export class GoodsStore {
   goods: IGood[] = [];

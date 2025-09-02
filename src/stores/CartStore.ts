@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { RootStore } from "./RootStore";
-import { IGood } from "../types";
+import { RootStore } from "@/stores/RootStore";
+import { IGood } from "@/types";
 
 const CART_STORAGE_KEY = "cart";
 const CART_TTL = 10 * 60 * 1000; // 10 minutes

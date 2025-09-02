@@ -1,6 +1,6 @@
-import { GoodsStore } from "./GoodsStore";
-import { RootStore } from "./RootStore";
-import { IGood } from "../types";
+import { GoodsStore } from "@/stores/GoodsStore";
+import { RootStore } from "@/stores/RootStore";
+import { IGood } from "@/types";
 
 // Mock RootStore and its dependencies
 jest.mock("./RootStore", () => ({

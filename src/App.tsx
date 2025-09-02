@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Layout } from "antd";
-import Header from "./components/Header";
-import MainPage from "./pages/MainPage";
-import CatalogPage from "./pages/CatalogPage";
-import CartPage from "./pages/CartPage";
-import { useStores } from "./stores/StoreProvider";
+import Header from "@/components/Header";
+import MainPage from "@/pages/MainPage";
+import CatalogPage from "@/pages/CatalogPage";
+import CartPage from "@/pages/CartPage";
+import { useStores } from "@/stores/StoreProvider";
 
 const { Content } = Layout;
 

@@ -1,6 +1,6 @@
 import { makeAutoObservable, reaction } from "mobx";
-import { DealerId, SortMode } from "../types";
-import { RootStore } from "./RootStore";
+import { DealerId, SortMode } from "@/types";
+import { RootStore } from "@/stores/RootStore";
 
 export class FilterStore {
   selectedDealers: DealerId[] = [];
