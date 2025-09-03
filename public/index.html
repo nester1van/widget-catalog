@@ -1,28 +1,35 @@
 <!doctype html>
 <html>
- <head>
-   <meta charset="UTF-8" />
-   <meta
-     name="viewport"
-     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-   />
-   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-   <title>Виджет каталог</title>
- </head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Виджет каталог</title>
+    <style>
+    body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    </style>
+  </head>
 
 
- <body>
-   <div id="widget-catalog"></div>
-   <script type="text/javascript">
-     function ready() {
+  <body>
+    <div id="widget-catalog"></div>
+    <script type="text/javascript">
+      function ready() {
 
 
-       window.widgetCatalog = new WidgetCatalog({el: '#widget-catalog', dealers: []});
-       window.widgetCatalog.run();
-     }
+        window.widgetCatalog = new WidgetCatalog({el: '#widget-catalog', dealers: []});
+        window.widgetCatalog.run();
+      }
 
 
-     document.addEventListener('DOMContentLoaded', ready);
-   </script>
- </body>
+      document.addEventListener('DOMContentLoaded', ready);
+    </script>
+  </body>
 </html>
