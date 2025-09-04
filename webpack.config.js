@@ -12,6 +12,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'widget-catalog.js',
+    publicPath: '',
     library: {
       name: 'WidgetCatalog',
       type: 'window',
@@ -19,9 +20,6 @@ module.exports = {
     },
   },
   devtool: isDev ? 'source-map' : false,
-  devServer: {
-    port: 3003,
-  },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.scss'],
     modules: ['node_modules'],
@@ -44,12 +42,7 @@ module.exports = {
       {
         test: /\.module\.s(a|c)ss$/,
         use: [
-          {
-            loader: 'style-loader',
-            options: {
-              injectType: 'singletonStyleTag',
-            },
-          },
+          isProd ? MiniCssExtractPlugin.loader : 'style-loader',
           {
             loader: 'css-loader',
             options: {
@@ -60,39 +53,36 @@ module.exports = {
               importLoaders: 1,
             },
           },
-          {
-            loader: 'sass-loader',
-          },
+          'sass-loader',
         ],
       },
       {
         test: /\.(s?(a|c)ss)$/,
         exclude: /\.module\.(s(a|c)ss)$/,
         use: [
-          {
-            loader: 'style-loader',
-            options: {
-              injectType: 'singletonStyleTag',
-            },
-          },
+          isProd ? MiniCssExtractPlugin.loader : 'style-loader',
           'css-loader',
-          {
-            loader: 'sass-loader',
-          },
+          'sass-loader',
         ],
       },
-      { test: /\.(png|jpe?g|gif|svg)$/, type: 'asset/resource' }
+      {
+        test: /\.(png|jpe?g|gif|svg)$/,
+        type: 'asset/resource'
+      }
     ]
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({ filename: 'widget-catalog.css' }),
+    new MiniCssExtractPlugin({
+      filename: 'widget-catalog.css'
+    }),
     new ForkTsCheckerWebpackPlugin(),
     new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'public', 'index.html') })
   ],
   devServer: {
     static: path.resolve(__dirname, 'public'),
     port: 3000,
-    hot: true
+    hot: true,
+    historyApiFallback: true,
   }
 };
