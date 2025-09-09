@@ -19,9 +19,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "antd": "^5.9.0",
+    "antd": "^5.27.3",
     "mobx": "^6.10.0",
-    "mobx-react-lite": "^3.4.0",
+    "mobx-react-lite": "^4.1.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^6.23.1"
