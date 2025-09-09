@@ -20,11 +20,6 @@ export class CartStore {
     this.loadFromStorage();
   }
 
-  addItem(id: string) {
-    this.items.set(id, (this.items.get(id) || 0) + 1);
-    this.saveToStorage();
-  }
-
   increment(id: string) {
     this.items.set(id, (this.items.get(id) || 0) + 1);
     this.saveToStorage();
@@ -73,6 +68,17 @@ export class CartStore {
       );
       return sum + (good ? good.price * quantity : 0);
     }, 0);
+  }
+
+  get cartItemsDetails() {
+    return Array.from(this.items.entries())
+      .map(([id, quantity]) => {
+        const product = this.rootStore.goodsStore.goods.find(
+          (g) => g.id === id,
+        );
+        return { product, quantity };
+      })
+      .filter((item) => item.product) as { product: IGood; quantity: number }[];
   }
 
   saveToStorage() {

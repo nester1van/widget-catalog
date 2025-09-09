@@ -56,7 +56,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </Button>
           </>
         ) : (
-          <Button type="primary" onClick={() => cartStore.addItem(product.id)}>
+          <Button type="primary" onClick={() => cartStore.increment(product.id)}>
             В корзину
           </Button>
         )}

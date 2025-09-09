@@ -25,12 +25,7 @@ const CartPage: React.FC = () => {
     return <Spin />;
   }
 
-  const cartItems = Array.from(cartStore.items.entries())
-    .map(([id, quantity]) => {
-      const product = goodsStore.goods.find((g) => g.id === id);
-      return { product, quantity };
-    })
-    .filter((item) => item.product) as { product: IGood; quantity: number }[];
+  const { cartItemsDetails: cartItems } = cartStore;
 
   if (cartItems.length === 0) {
     return (
